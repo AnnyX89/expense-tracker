@@ -4,7 +4,8 @@ const KEY = 'expenses_v1';
 
 export function loadExpenses(): Expense[] {
   try {
-    return JSON.parse(localStorage.getItem(KEY) ?? '[]');
+    const raw: Expense[] = JSON.parse(localStorage.getItem(KEY) ?? '[]');
+    return raw.map(e => ({ ...e, amount: Number(e.amount) || 0 }));
   } catch {
     return [];
   }

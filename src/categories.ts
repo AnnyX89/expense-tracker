@@ -67,7 +67,7 @@ export const CATEGORIES: Category[] = [
   },
   {
     id: 'delivery', label: 'Доставка / Маркетплейсы', icon: '📦', color: '#fdba74',
-    keywords: ['wildberries','вайлдберриз','wb','ozon','озон','яндекс маркет','aliexpress','алиэкспресс','cdek','сдэк','доставка','яндекс лавка','самокат','купер','сберлогистика','boxberry','почта','dpd'],
+    keywords: ['wildberries','вайлдберриз','wb','ozon','озон','авито','avito','яндекс маркет','aliexpress','алиэкспресс','cdek','сдэк','доставка','яндекс лавка','самокат','купер','сберлогистика','boxberry','почта','dpd'],
   },
   {
     id: 'sport', label: 'Спорт / Фитнес', icon: '🏋️', color: '#86efac',

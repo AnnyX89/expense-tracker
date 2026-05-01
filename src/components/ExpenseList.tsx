@@ -17,13 +17,17 @@ function groupByDate(expenses: Expense[]) {
   return Object.entries(groups).sort((a, b) => b[0].localeCompare(a[0]));
 }
 
+function localDateStr(d: Date) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
 function formatDate(iso: string) {
   const d = new Date(iso + 'T00:00:00');
   const today = new Date();
   const yesterday = new Date(today);
   yesterday.setDate(today.getDate() - 1);
-  if (iso === today.toISOString().slice(0, 10)) return 'Сегодня';
-  if (iso === yesterday.toISOString().slice(0, 10)) return 'Вчера';
+  if (iso === localDateStr(today)) return 'Сегодня';
+  if (iso === localDateStr(yesterday)) return 'Вчера';
   return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
 }
 

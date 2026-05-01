@@ -5,14 +5,16 @@ import ExpenseList from './components/ExpenseList';
 import Analytics from './components/Analytics';
 import { loadExpenses, addExpense, deleteExpense } from './storage';
 import type { Expense } from './types';
-import './index.css';
 
 function monthKey(year: number, month: number) {
   return `${year}-${String(month + 1).padStart(2, '0')}`;
 }
 
 function monthLabel(year: number, month: number) {
-  return new Date(year, month, 1).toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' });
+  const d = new Date(year, month, 1);
+  const m = d.toLocaleDateString('ru-RU', { month: 'long' });
+  const capitalized = m.charAt(0).toUpperCase() + m.slice(1);
+  return `${capitalized} ${year}`;
 }
 
 export default function App() {
@@ -32,7 +34,8 @@ export default function App() {
   useEffect(() => { document.title = 'Мои расходы 💸'; }, []);
 
   function handleAdd(description: string, amount: number, categoryId: string) {
-    const today = new Date().toISOString().slice(0, 10);
+    const now = new Date();
+    const today = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
     const expense: Expense = {
       id: crypto.randomUUID(),
       description,
@@ -73,7 +76,7 @@ export default function App() {
           <button onClick={prevMonth} className="w-9 h-9 flex items-center justify-center rounded-full text-white/30 hover:text-white hover:bg-white/10 transition-all">
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <div className="text-white font-semibold text-lg capitalize min-w-44 text-center">
+          <div className="text-white font-semibold text-lg min-w-44 text-center">
             {monthLabel(viewYear, viewMonth)}
           </div>
           <button
